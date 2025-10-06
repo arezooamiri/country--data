@@ -24,12 +24,12 @@ export default function Countries() {
         onChange={(e) => setSearch(e.target.value)}
         className="mb-6"
       />
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 dark:text-white">
         {filtered?.map((c) => (
           <Link
             key={c.name.common}
             href={`/country/${encodeURIComponent(c.name.common)}`}
-            className="p-4 bg-white rounded shadow"
+            className="p-4 bg-white  dark:bg-black dark:shadow-amber-50 rounded shadow "
           >
             <img
               src={c.flags.png}
