@@ -1,14 +1,11 @@
-interface CountryDetailProps {
-  params: {
-    name: string;
-  };
-}
 
-export default async function CountryDetailPage({
-  params,
-}: CountryDetailProps) {
+
+export default async function CountryDetailPage(props:{
+  params:{name:string}
+} ){
+   const{name}=props.params;
   const res = await fetch(
-    `https://restcountries.com/v3.1/name/${params.name}?fields=name,flags,population,region,subregion,capital`
+    `https://restcountries.com/v3.1/name/${name}?fields=name,flags,population,region,subregion,capital`
   );
   if (!res.ok) throw new Error("Failed to fetch country");
   const data = await res.json();
