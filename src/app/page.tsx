@@ -1,5 +1,6 @@
 "use client";
 
+import { Input } from "@/components/ui/input";
 import { useCountry } from "./api/api";
 
 import { useState } from "react";
@@ -13,16 +14,17 @@ export default function HomePage() {
 
   const filtered = countries?.filter((c) =>
     c.name.common.toLowerCase().includes(search.toLowerCase())
+  || c.region.toLocaleLowerCase().includes(search.toLocaleLowerCase())
   );
 
   return (
     <div className="p-6 max-w-5xl mx-auto">
-      {/* <Input
+      <Input
         placeholder="Search countries..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         className="mb-6"
-      /> */}
+      />
 
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
         {filtered?.map((c) => (
