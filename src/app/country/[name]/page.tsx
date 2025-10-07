@@ -1,18 +1,23 @@
+
 import { ModeToggle } from "@/components/ModeToggle";
 
 export default async function CountryDetailPage({ params }: any) {
-  // Safety check
+ 
   if (!params?.name) return <p>Country name not provided.</p>;
-
+  const countryName=decodeURIComponent(params.name);
   const res = await fetch(
-    `https://restcountries.com/v3.1/name/${encodeURIComponent(params.name)}?fields=name,flags,population,region,subregion,capital`,
+    `https://restcountries.com/v3.1/name/${encodeURIComponent(countryName)}?fields=name,flags,population,region,subregion,capital`,
     { cache: "no-store" }
   );
 
   if (!res.ok) throw new Error("Failed to fetch country");
 
   const data = await res.json();
-  const country = data[0];
+  const country =
+    data.find(
+      (c: any) =>
+        c.name.common.toLowerCase() === params.name.toLowerCase()
+    ) || data[0];
 
   return (
     <div className="flex flex-col h-screen gap-2 pt-4 justify-center items-center shadow dark:text-white">
